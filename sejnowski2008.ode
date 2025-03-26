@@ -1,0 +1,28 @@
+# Parameters
+param E_Na = 50
+param E_K = -100
+param E_leak = -70
+param g_fast = 20
+param g_slow = 20
+param g_leak = 2
+param phi_w = 0.15
+param C = 2
+param beta_m = -1.2
+param beta_w = -13
+param gamma_m = 18
+param gamma_w = 10
+param I_stim = 60
+
+# State variables
+V' = (I_stim - g_fast * M_INF(V) * (V - E_Na) - g_slow * W * (V - E_K) - g_leak * (V - E_leak)) / C
+W' = phi_w * (W_INF(V) - W) / TAU_W(V)
+
+# Activation functions
+M_INF(V) = 0.5 * (1 + tanh((V - beta_m) / gamma_m))
+W_INF(V) = 0.5 * (1 + tanh((V - beta_w) / gamma_w))
+TAU_W(V) = 1 / cosh((V - beta_w) / (2 * gamma_w))
+
+
+
+done
+
